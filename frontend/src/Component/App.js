@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-
+import SignUp from './SignUp';
 const styles = {
   root: {
     flexGrow: 1
@@ -46,6 +46,7 @@ class App extends Component {
             </Toolbar>
           </AppBar>
         </div>
+        <SignUp />
       </div>
     );
   }
