@@ -6,10 +6,12 @@ const mongoose = require("mongoose");
 const keys = require("./config/app_keys");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
-const User = mongoose.model("User");
+// const User = mongoose.model("User");
+require("./models/User");
 
-const index = require("./routes/index");
 const users = require("./routes/users");
+const login = require("./routes/login");
+const logout = require("./routes/logout");
 
 mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI);
@@ -41,7 +43,6 @@ app.use(
   session({
     secret: "supersecret",
     resave: false,
-    store: store,
     saveUninitialized: false,
     cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }
   })
@@ -52,7 +53,6 @@ app.use(passport.session());
 
 // controllers
 
-app.use("/", index);
 app.use("/api/users", users);
 app.use("/api/login", login);
 app.use("/api/logout", logout);
@@ -61,7 +61,7 @@ app.use("/api/logout", logout);
 
 passport.use(
   new LocalStrategy(function(username, password, done) {
-    User.findOne({ username }, function(err, user) {
+    User.findOne({ username: username }, function(err, user) {
       if (err) {
         return done(err);
       }
