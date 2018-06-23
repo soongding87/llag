@@ -37,9 +37,8 @@ class SignUp extends Component {
 
 handleSubmit = event => {
   event.preventDefault();
-  axios.post("/users", this.state).then(function(res){
+  axios.post("/api/users", this.state).then(function(res){
     console.log("submit is working")
-    res.redirect("/");
   })
 }
 
@@ -71,7 +70,7 @@ handleSubmit = event => {
           onChange={this.handleChange('password')}
           margin="normal"
         />
-        <button type="submit">submit</button>
+        <Button type="submit">submit</Button>
       </form>
     );
   }
