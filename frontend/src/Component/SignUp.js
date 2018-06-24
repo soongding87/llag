@@ -1,30 +1,13 @@
-import React, { Component } from "react";
-import { withStyles } from "@material-ui/core/styles";
-import axios from "axios";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-
-const styles = theme => ({
-  container: {
-    display: "flex",
-    flexWrap: "wrap"
-  },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 200
-  },
-  menu: {
-    width: 200
-  }
-});
+import React, { Component } from 'react';
+import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import axios from 'axios';
 
 class SignUp extends Component {
   constructor(props) {
     super();
     this.state = {
-      username: "",
-      password: ""
+      username: '',
+      password: ''
     };
   }
 
@@ -34,47 +17,73 @@ class SignUp extends Component {
     });
   };
 
-handleSubmit = event => {
-  event.preventDefault();
-  axios.post("/api/users", this.state).then(function(res){
-    console.log("submit is working")
-  })
-}
+  handleSubmit = event => {
+    event.preventDefault();
+    axios.post('/api/users', this.state).then(function(res) {
+      console.log('submit is working');
+    });
+  };
 
   render() {
-    const { classes } = this.props;
-
     return (
-      <form
-        className={classes.container}
-        noValidate
-        autoComplete="off"
-        onSubmit={this.handleSubmit}
-      >
-        <TextField
-          required
-          id="required"
-          label="name"
-          value={this.state.username}
-          className={classes.textField}
-          onChange={this.handleChange("username")}
-          margin="normal"
-        />
+      <Form>
+        <FormGroup>
+          <Label for="name">Name</Label>
+          <Input
+            type="name"
+            name="name"
+            id="name"
+            value={this.state.username}
+            onChange={this.handleChange('username')}
+            placeholder="YourName"
+          />
+        </FormGroup>
 
-        <TextField
-          id="password-input"
-          label="Password"
-          className={classes.textField}
-          type="password"
-          value={this.state.password}
-          autoComplete="current-password"
-          onChange={this.handleChange("password")}
-          margin="normal"
-        />
-        <Button type="submit">submit</Button>
-      </form>
+          <FormGroup>
+            <Label for="examplePassword">Password</Label>
+            <Input
+              type="password"
+              name="password"
+              id="examplePassword"
+              value={this.state.password}
+              autoComplete="current-password"
+                  onChange={this.handleChange("password")}
+
+              placeholder="Password"
+            />
+          </FormGroup>
+        <Button onClick={this.handleSubmit}>submit</Button>
+      </Form>
+
+      // <form
+      //   className={classes.container}
+      //   noValidate
+      //   autoComplete="off"
+      //   onSubmit={this.handleSubmit}
+      // >
+      //   <TextField
+      //     required
+      //     id="required"
+      //     label="name"
+      //     value={this.state.username}
+      //     className={classes.textField}
+      //     onChange={this.handleChange("username")}
+      //     margin="normal"
+      //   />
+      //
+      //   <TextField
+      //     id="password-input"
+      //     label="Password"
+      //     className={classes.textField}
+      //     type="password"
+      //     value={this.state.password}
+      //     autoComplete="current-password"
+      //     onChange={this.handleChange("password")}
+      //     margin="normal"
+      //   />
+      // </form>
     );
   }
 }
 
-export default withStyles(styles)(SignUp);
+export default SignUp;
