@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button, Checkbox, Form } from 'semantic-ui-react';
+
 import axios from 'axios';
 
 class SignUp extends Component {
@@ -26,36 +27,32 @@ class SignUp extends Component {
 
   render() {
     return (
-      <Form>
-        <FormGroup>
-          <Label for="name">Name</Label>
-          <Input
-            type="name"
-            name="name"
-            id="name"
-            value={this.state.username}
-            onChange={this.handleChange('username')}
-            placeholder="YourName"
-          />
-        </FormGroup>
-
-          <FormGroup>
-            <Label for="examplePassword">Password</Label>
-            <Input
-              type="password"
-              name="password"
-              id="examplePassword"
-              value={this.state.password}
-              autoComplete="current-password"
-                  onChange={this.handleChange("password")}
-
-              placeholder="Password"
+      <div>
+        <Form onSubmit={this.handleSubmit}>
+          <Form.Field>
+            <label>Name</label>
+            <input
+              placeholder="Name"
+                  value={this.state.username}
+              onChange={this.handleChange('username')}
             />
-          </FormGroup>
-        <Button onClick={this.handleSubmit}>submit</Button>
-      </Form>
-
-      // <form
+          </Form.Field>
+          <Form.Field>
+            <label>password</label>
+            <input
+              type="password"
+              placeholder="Password"
+                  value={this.state.password}
+              onChange={this.handleChange('password')}
+            />
+          </Form.Field>
+          <Form.Field>
+            <Checkbox label="I agree to the Terms and Conditions" />
+          </Form.Field>
+          <Button type="submit">Submit</Button>
+        </Form>
+      </div>
+      // <form>
       //   className={classes.container}
       //   noValidate
       //   autoComplete="off"
