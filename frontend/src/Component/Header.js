@@ -7,7 +7,7 @@ export default class Header extends Component {
 
     return (
       <div>
-        <Menu secondary>
+        <Menu secondary size="massive">
           <Menu.Item header>LLAG </Menu.Item>
           <Menu.Item
             name="home"
@@ -19,6 +19,7 @@ export default class Header extends Component {
           />
           <Menu.Item
             name="SignIn"
+            href="/signin"
           />
           <Menu.Menu position="right">
             <Menu.Item>
