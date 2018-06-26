@@ -1,14 +1,15 @@
-import React, { Component } from 'react';
-import { Button, Form } from 'semantic-ui-react';
+import React, { Component } from "react";
+import { Button, Form } from "semantic-ui-react";
 
-import axios from 'axios';
+import axios from "axios";
 
 class SignIn extends Component {
   constructor(props) {
     super();
     this.state = {
-      username: '',
-      password: ''
+      username: "",
+      password: "",
+      redirectTo: null
     };
   }
 
@@ -20,9 +21,17 @@ class SignIn extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    axios.get('/api/login').then(function(res) {
-      console.log('login is working');
-    });
+    axios
+      .post("/api/login")
+      .then(res => {
+        console.log(res.status);
+        if (res.status === 200) {
+          console.log(res);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   render() {
@@ -33,8 +42,8 @@ class SignIn extends Component {
             <label>Name</label>
             <input
               placeholder="Name"
-                  value={this.state.username}
-              onChange={this.handleChange('username')}
+              value={this.state.username}
+              onChange={this.handleChange("username")}
             />
           </Form.Field>
           <Form.Field>
@@ -42,15 +51,14 @@ class SignIn extends Component {
             <input
               type="password"
               placeholder="Password"
-                  value={this.state.password}
-              onChange={this.handleChange('password')}
+              value={this.state.password}
+              onChange={this.handleChange("password")}
             />
           </Form.Field>
 
           <Button type="submit">Submit</Button>
         </Form>
       </div>
-
     );
   }
 }
