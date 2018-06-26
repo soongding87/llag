@@ -1,15 +1,14 @@
-import React, { Component } from "react";
-import { Button, Form } from "semantic-ui-react";
+import React, { Component } from 'react';
+import { Button, Form } from 'semantic-ui-react';
 
-import axios from "axios";
+import axios from 'axios';
 
 class SignIn extends Component {
   constructor(props) {
     super();
     this.state = {
-      username: "",
-      password: "",
-      redirectTo: null
+      username: '',
+      password: ''
     };
   }
 
@@ -52,13 +51,14 @@ class SignIn extends Component {
               type="password"
               placeholder="Password"
               value={this.state.password}
-              onChange={this.handleChange("password")}
+              onChange={this.handleChange('password')}
             />
           </Form.Field>
 
-          <Button type="submit">Submit</Button>
+          <Button >Submit</Button>
         </Form>
       </div>
+
     );
   }
 }

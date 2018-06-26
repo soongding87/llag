@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import Header from "./Header";
-import SignUp from "./SignUp";
-import SignIn from "./SignIn";
-import { BrowserRouter, Route } from "react-router-dom";
-import Landing from "./Landing";
+import React, { Component } from 'react';
+import Header from './Header';
+import SignUp from './SignUp';
+import SignIn from './SignIn';
+import { BrowserRouter, Route } from 'react-router-dom';
+import Landing from './Landing';
 
 class App extends Component {
   constructor(props) {
@@ -11,13 +11,14 @@ class App extends Component {
   }
 
   render() {
+
     return (
-      <div className="App">
+      <div className="ui container">
         <Header />
         <BrowserRouter>
           <div>
             <Route exact path="/signup" component={SignUp} />
-            <Route exact path="/login" component={SignIn} />
+            <Route exact path="/signin" component={SignIn} />
             <Route exact path="/" component={Landing} />
           </div>
         </BrowserRouter>
