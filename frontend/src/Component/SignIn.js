@@ -20,7 +20,7 @@ class SignIn extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    axios.get('/api/login').then(function(res) {
+    axios.post('/api/login').then(function(res) {
       console.log('login is working');
     });
   };
@@ -42,12 +42,12 @@ class SignIn extends Component {
             <input
               type="password"
               placeholder="Password"
-                  value={this.state.password}
+              value={this.state.password}
               onChange={this.handleChange('password')}
             />
           </Form.Field>
 
-          <Button type="submit">Submit</Button>
+          <Button >Submit</Button>
         </Form>
       </div>
 
