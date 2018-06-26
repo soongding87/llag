@@ -16,9 +16,12 @@ const logout = require("./routes/logout");
 mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI);
 
+
 const app = express();
 
 // authentication libraries
+
+require("./models/User");
 
 const bcrypt = require("bcrypt");
 const passport = require("passport");
