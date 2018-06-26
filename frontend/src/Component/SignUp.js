@@ -49,7 +49,7 @@ class SignUp extends Component {
           <Form.Field>
             <Checkbox label="I agree to the Terms and Conditions" />
           </Form.Field>
-          <Button type="submit">Submit</Button>
+          <Button>Submit</Button>
         </Form>
       </div>
       // <form>
