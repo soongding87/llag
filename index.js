@@ -16,7 +16,6 @@ const logout = require("./routes/logout");
 mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI);
 
-
 const app = express();
 
 // authentication libraries
@@ -43,13 +42,19 @@ app.use(
   session({
     secret: "supersecret",
     resave: false,
-    saveUninitialized: false,
-    cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }
+    saveUninitialized: true
+    // cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }
   })
 );
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+// app.use(function(req, res, next) {
+//   res.locals.isAuthenticated = req.isAuthenticated();
+//   res.locals.user = req.user;
+//   next();
+// });
 
 // controllers
 
@@ -78,6 +83,18 @@ passport.use(
     });
   })
 );
+
+// passport serializer
+
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
 
 const PORT = 4000;
 app.listen(PORT);
