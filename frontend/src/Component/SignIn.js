@@ -20,9 +20,17 @@ class SignIn extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    axios.post('/api/login').then(function(res) {
-      console.log('login is working');
-    });
+    axios
+      .post("/api/login")
+      .then(res => {
+        console.log(res.status);
+        if (res.status === 200) {
+          console.log(res);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   render() {
@@ -33,8 +41,8 @@ class SignIn extends Component {
             <label>Name</label>
             <input
               placeholder="Name"
-                  value={this.state.username}
-              onChange={this.handleChange('username')}
+              value={this.state.username}
+              onChange={this.handleChange("username")}
             />
           </Form.Field>
           <Form.Field>
