@@ -1,14 +1,15 @@
-import React, { Component } from 'react';
-import { Button, Form } from 'semantic-ui-react';
-
-import axios from 'axios';
+import React, { Component } from "react";
+import { Button, Form } from "semantic-ui-react";
+import { Redirect } from "react-router-dom";
+import axios from "axios";
 
 class SignIn extends Component {
   constructor(props) {
     super();
     this.state = {
-      username: '',
-      password: ''
+      username: "",
+      password: "",
+      redirectTo: null
     };
   }
 
@@ -23,7 +24,11 @@ class SignIn extends Component {
     axios
       .post("/api/login", this.state)
       .then(res => {
-        console.log(res.status);
+        if (res.status === 200) {
+          this.setState({
+            redirectTo: "/"
+          });
+        }
       })
       .catch(err => {
         console.log(err);
@@ -31,6 +36,9 @@ class SignIn extends Component {
   };
 
   render() {
+    if (this.state.redirectTo) {
+      return <Redirect to={{ pathname: this.state.redirectTo }} />;
+    }
     return (
       <div>
         <Form onSubmit={this.handleSubmit}>
@@ -48,14 +56,13 @@ class SignIn extends Component {
               type="password"
               placeholder="Password"
               value={this.state.password}
-              onChange={this.handleChange('password')}
+              onChange={this.handleChange("password")}
             />
           </Form.Field>
 
-          <Button >Submit</Button>
+          <Button>Submit</Button>
         </Form>
       </div>
-
     );
   }
 }
