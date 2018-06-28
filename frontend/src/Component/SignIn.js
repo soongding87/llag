@@ -21,12 +21,9 @@ class SignIn extends Component {
   handleSubmit = event => {
     event.preventDefault();
     axios
-      .post("/api/login")
+      .post("/api/login", this.state)
       .then(res => {
         console.log(res.status);
-        if (res.status === 200) {
-          console.log(res);
-        }
       })
       .catch(err => {
         console.log(err);

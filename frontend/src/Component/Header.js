@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { Input, Menu } from 'semantic-ui-react';
+import { connect } from 'react-redux';
 
-export default class Header extends Component {
+
+class Header extends Component {
+
 
   render() {
 
@@ -21,6 +24,7 @@ export default class Header extends Component {
             name="SignIn"
             href="/signin"
           />
+          {console.log(this.props.auth)}
           <Menu.Menu position="right">
             <Menu.Item>
               <Input icon="search" placeholder="Search..." />
@@ -31,3 +35,9 @@ export default class Header extends Component {
     );
   }
 }
+
+function mapStateToProps({ auth }) {
+  return { auth };
+}
+
+export default connect(mapStateToProps)(Header);
