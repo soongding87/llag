@@ -6,8 +6,9 @@ const mongoose = require("mongoose");
 const keys = require("./config/app_keys");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
-// const User = mongoose.model("User");
 require("./models/User");
+const User = mongoose.model("User");
+
 
 const users = require("./routes/users");
 const login = require("./routes/login");
@@ -66,6 +67,7 @@ app.use("/api/logout", logout);
 
 passport.use(
   new LocalStrategy(function(username, password, done) {
+
     User.findOne({ username: username }, function(err, user) {
       if (err) {
         return done(err);

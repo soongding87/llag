@@ -8,11 +8,10 @@ const landingStyle = {
   height: '60vh',
   alignItems: 'center',
   display: 'flex',
-  alignItems: 'center',
   justifyContent: 'center'
 }
 
-  
+
 
 const Landing = () => {
   return (
