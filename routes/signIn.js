@@ -4,14 +4,14 @@ const passport = require("passport");
 // login page
 module.exports = app => {
 
-app.get("api/signin", function(req, res, next) {
+app.get("/api/signin", function(req, res, next) {
   res.json({
     message: "success"
   });
 });
 
 app.post(
-  "api/signin",
+  "/api/signin",
   passport.authenticate("local", {
     successRedirect: "/",
     failureRedirect: "/signin",
