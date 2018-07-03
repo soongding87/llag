@@ -12,13 +12,12 @@ import reduxThunk from "redux-thunk";
 import reducers from "../reducers";
 
 class App extends Component {
-  // componentDidMount() {
+  // componentDidMount(props) {
   //   this.props.loginUser();
   // }
   // store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
   render() {
-    console.log(this.props.store);
     return (
       <div className="ui container">
         <Header />
