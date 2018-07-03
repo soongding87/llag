@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import Landing from "./Landing";
 import { createStore, applyMiddleware } from "redux";
 import reduxThunk from "redux-thunk";
-
+import Contents from "./Contents";
 import reducers from "../reducers";
 
 class App extends Component {
@@ -27,15 +27,12 @@ class App extends Component {
             <Route exact path="/signup" component={SignUp} />
             <Route exact path="/signin" component={SignIn} />
             <Route exact path="/" component={Landing} />
+            <Route exact path="/contents" component={Contents} />
           </div>
         </BrowserRouter>
       </div>
     );
   }
-}
-
-function mapStateToProps({ log }) {
-  return { log };
 }
 
 export default connect(null, actions)(App);
