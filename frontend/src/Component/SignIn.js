@@ -5,7 +5,7 @@ import axios from "axios";
 
 class SignIn extends Component {
   constructor(props) {
-    super();
+    super(props);
     this.state = {
       username: "",
       password: "",

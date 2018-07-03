@@ -12,11 +12,6 @@ import Contents from "./Contents";
 import reducers from "../reducers";
 
 class App extends Component {
-  // componentDidMount(props) {
-  //   this.props.loginUser();
-  // }
-  // store = createStore(reducers, {}, applyMiddleware(reduxThunk));
-
   render() {
     return (
       <div className="ui container">
