@@ -24,6 +24,10 @@ class SignIn extends Component {
     axios
       .post("/api/signin", this.state)
       .then(res => {
+        if (res.status === 200)
+          this.setState({
+            redirectTo: "/"
+          });
         console.log(res.status);
       })
       .catch(err => {
