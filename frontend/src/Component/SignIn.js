@@ -21,7 +21,7 @@ class SignIn extends Component {
   handleSubmit = event => {
     event.preventDefault();
     axios
-      .post("/api/login", this.state)
+      .post("/api/signin", this.state)
       .then(res => {
         console.log(res.status);
       })

@@ -7,7 +7,7 @@ class Header extends Component {
 
 
   render() {
-
+    console.log(this.props.auth)
     return (
       <div>
         <Menu secondary size="massive">
@@ -24,7 +24,10 @@ class Header extends Component {
             name="SignIn"
             href="/signin"
           />
-          {console.log(this.props.auth)}
+          <Menu.Item
+            name="contents"
+            href="/contents"
+          />
           <Menu.Menu position="right">
             <Menu.Item>
               <Input icon="search" placeholder="Search..." />

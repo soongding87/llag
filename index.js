@@ -1,18 +1,11 @@
-const express = require("express");
-const path = require("path");
-const favicon = require("serve-favicon");
-const logger = require("morgan");
-const mongoose = require("mongoose");
-const keys = require("./config/app_keys");
-const cookieParser = require("cookie-parser");
-const bodyParser = require("body-parser");
-require("./models/User");
-const User = mongoose.model("User");
-
-
-const users = require("./routes/users");
-const login = require("./routes/login");
-const logout = require("./routes/logout");
+const express = require('express');
+const path = require('path');
+const logger = require('morgan');
+const mongoose = require('mongoose');
+const keys = require('./config/app_keys');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+require('./models/User');
 
 mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI);
@@ -20,33 +13,31 @@ mongoose.connect(keys.mongoURI);
 const app = express();
 
 // authentication libraries
-
-require("./models/User");
-
-const bcrypt = require("bcrypt");
-const passport = require("passport");
-const session = require("express-session");
-const LocalStrategy = require("passport-local").Strategy;
+const bcrypt = require('bcrypt');
+const passport = require('passport');
+const session = require('express-session');
+const LocalStrategy = require('passport-local').Strategy;
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
-app.use(logger("dev"));
+app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // session
 
 app.use(
   session({
-    secret: "supersecret",
+    secret: 'supersecret',
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: true
     // cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }
   })
 );
+app.use(bodyParser.urlencoded({ extended: false }));
+
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -59,26 +50,26 @@ app.use(passport.session());
 
 // controllers
 
-app.use("/api/users", users);
-app.use("/api/login", login);
-app.use("/api/logout", logout);
+require('./routes/users')(app);
+require('./routes/signIn')(app);
+
+// app.use('/api/logout', logout);
 
 // passport local strategy
 
 passport.use(
-  new LocalStrategy(function(username, password, done) {
-
-    User.findOne({ username: username }, function(err, user) {
+  new LocalStrategy((username, password, done) => {
+    User.findOne({ username: username }, (err, user) => {
       if (err) {
         return done(err);
       }
       if (!user) {
-        return done(null, false, { message: "Incorrect username" });
+        return done(null, false, { message: 'Incorrect username' });
       }
       // const hash = user.password;
       // bcrypt.compare(password, hash, function(err, res) {
       if (!user.validPassword(password)) {
-        return done(null, false, { message: "Incorrect password." });
+        return done(null, false, { message: 'Incorrect password.' });
       }
       return done(null, user);
       // });
@@ -88,13 +79,13 @@ passport.use(
 
 // passport serializer
 
-passport.serializeUser(function(user, done) {
+passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
-    done(err, user);
+passport.deserializeUser((id, done) => {
+  User.findById(id).then(user => {
+    done(null, user);
   });
 });
 
