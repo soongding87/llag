@@ -1,25 +1,24 @@
-const express = require("express");
-const path = require("path");
-const favicon = require("serve-favicon");
-const logger = require("morgan");
-const mongoose = require("mongoose");
-const keys = require("./config/app_keys");
-const cookieParser = require("cookie-parser");
-const bodyParser = require("body-parser");
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const mongoose = require('mongoose');
+const keys = require('./config/app_keys');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 
 // authentication libraries
-const bcrypt = require("bcrypt");
-const passport = require("passport");
-const session = require("express-session");
-const LocalStrategy = require("passport-local").Strategy;
+const bcrypt = require('bcrypt');
+const passport = require('passport');
+const session = require('express-session');
+const LocalStrategy = require('passport-local').Strategy;
 //
 
-require("./models/User");
+require('./models/User');
+const User = mongoose.model('User');
 
-mongoose.connect(keys.mongoURI);
 mongoose.Promise = global.Promise;
-
-const User = mongoose.model("User");
+mongoose.connect(keys.mongoURI);
 
 const app = express();
 
