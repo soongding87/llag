@@ -1,11 +1,18 @@
-const express = require('express');
-const path = require('path');
-const logger = require('morgan');
-const mongoose = require('mongoose');
-const keys = require('./config/app_keys');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-require('./models/User');
+const express = require("express");
+const path = require("path");
+const favicon = require("serve-favicon");
+const logger = require("morgan");
+const mongoose = require("mongoose");
+const keys = require("./config/app_keys");
+const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
+require("./models/User");
+const User = mongoose.model("User");
+
+
+const users = require("./routes/users");
+const login = require("./routes/login");
+const logout = require("./routes/logout");
 
 mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI);
