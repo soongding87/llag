@@ -1,13 +1,16 @@
 const express = require("express");
-const router = express.Router();
 const passport = require("passport");
 
 // Ending session
 
-router.get("/", function(req, res, next) {
-  req.logout();
-  req.session.destroy();
-  res.redirect("/");
-});
+module.exports = app => {
+  app.get("/api/logout", function(req, res, next) {
+    console.log("try logout", req.session)
+    req.logout();
+    req.session.destroy();
+    res.json({
+      message: "Logged out"
+    });
+  });
 
-module.exports = router;
+};

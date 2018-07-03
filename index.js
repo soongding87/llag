@@ -69,8 +69,8 @@ app.use(passport.session());
 
 require("./routes/users")(app);
 require("./routes/signIn")(app);
+require("./routes/logout")(app);
 
-// app.use('/api/logout', logout);
 
 // passport local strategy
 
