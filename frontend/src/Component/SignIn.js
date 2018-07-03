@@ -22,14 +22,13 @@ class SignIn extends Component {
   handleSubmit = event => {
     event.preventDefault();
     axios
-      .post("/api/login", this.state)
+      .post("/api/signin", this.state)
       .then(res => {
-        if (res.status === 200) {
+        if (res.status === 200)
           this.setState({
             redirectTo: "/"
           });
-        }
-        console.log(this.state);
+        console.log(res.status);
       })
       .catch(err => {
         console.log(err);
