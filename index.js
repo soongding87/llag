@@ -1,29 +1,26 @@
-const express = require("express");
-const path = require("path");
-const favicon = require("serve-favicon");
-const logger = require("morgan");
-const mongoose = require("mongoose");
-const keys = require("./config/app_keys");
-const cookieParser = require("cookie-parser");
-const bodyParser = require("body-parser");
-require("./models/User");
-const User = mongoose.model("User");
-
-
-const users = require("./routes/users");
-const login = require("./routes/login");
-const logout = require("./routes/logout");
-
-mongoose.Promise = global.Promise;
-mongoose.connect(keys.mongoURI);
-
-const app = express();
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const mongoose = require('mongoose');
+const keys = require('./config/app_keys');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 
 // authentication libraries
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 const session = require('express-session');
 const LocalStrategy = require('passport-local').Strategy;
+//
+
+require('./models/User');
+const User = mongoose.model('User');
+
+mongoose.Promise = global.Promise;
+mongoose.connect(keys.mongoURI);
+
+const app = express();
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -34,16 +31,29 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // session
+const MongoDBStore = require('connect-mongodb-session')(session);
+
+const dbStore = new MongoDBStore({
+  uri: keys.mongoURI,
+  collection: 'mySessions'
+});
+
+dbStore.on('error', error => {
+  console.log(error);
+});
 
 app.use(
   session({
     secret: 'supersecret',
     resave: false,
-    saveUninitialized: true
-    // cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }
+    saveUninitialized: true,
+    cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 },
+    store: dbStore
   })
 );
 app.use(bodyParser.urlencoded({ extended: false }));
+
+// DB Session
 
 
 app.use(passport.initialize());
