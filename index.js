@@ -1,50 +1,51 @@
-const express = require('express');
-const path = require('path');
-const favicon = require('serve-favicon');
-const logger = require('morgan');
-const mongoose = require('mongoose');
-const keys = require('./config/app_keys');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
+const express = require("express");
+const path = require("path");
+const favicon = require("serve-favicon");
+const logger = require("morgan");
+const mongoose = require("mongoose");
+const keys = require("./config/app_keys");
+const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
 
 // authentication libraries
-const bcrypt = require('bcrypt');
-const passport = require('passport');
-const session = require('express-session');
-const LocalStrategy = require('passport-local').Strategy;
+const bcrypt = require("bcrypt");
+const passport = require("passport");
+const session = require("express-session");
+const LocalStrategy = require("passport-local").Strategy;
 //
 
-require('./models/User');
-const User = mongoose.model('User');
+require("./models/User");
 
-mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI);
+mongoose.Promise = global.Promise;
+
+const User = mongoose.model("User");
 
 const app = express();
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
-app.use(logger('dev'));
+app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 
 // session
-const MongoDBStore = require('connect-mongodb-session')(session);
+const MongoDBStore = require("connect-mongodb-session")(session);
 
 const dbStore = new MongoDBStore({
   uri: keys.mongoURI,
-  collection: 'mySessions'
+  collection: "mySessions"
 });
 
-dbStore.on('error', error => {
+dbStore.on("error", error => {
   console.log(error);
 });
 
 app.use(
   session({
-    secret: 'supersecret',
+    secret: "supersecret",
     resave: false,
     saveUninitialized: true,
     cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 },
@@ -54,7 +55,6 @@ app.use(
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // DB Session
-
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -67,8 +67,8 @@ app.use(passport.session());
 
 // controllers
 
-require('./routes/users')(app);
-require('./routes/signIn')(app);
+require("./routes/users")(app);
+require("./routes/signIn")(app);
 
 // app.use('/api/logout', logout);
 
@@ -81,12 +81,12 @@ passport.use(
         return done(err);
       }
       if (!user) {
-        return done(null, false, { message: 'Incorrect username' });
+        return done(null, false, { message: "Incorrect username" });
       }
       // const hash = user.password;
       // bcrypt.compare(password, hash, function(err, res) {
       if (!user.validPassword(password)) {
-        return done(null, false, { message: 'Incorrect password.' });
+        return done(null, false, { message: "Incorrect password." });
       }
       return done(null, user);
       // });

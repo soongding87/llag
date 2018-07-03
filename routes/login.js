@@ -4,18 +4,18 @@ const passport = require("passport");
 
 // login page
 
-router.get("/", function(req, res, next) {
-  res.json({
-    message: "success"
-  });
-});
-
-router.post(
-  "/",
-  passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/signin"
-  })
-);
+// router.get("/", function(req, res, next) {
+//   res.json({
+//     message: "success"
+//   });
+// });
+//
+// router.post(
+//   "/",
+//   passport.authenticate("local", {
+//     successRedirect: "/",
+//     failureRedirect: "/signin"
+//   })
+// );
 
 module.exports = router;

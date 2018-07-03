@@ -9,11 +9,6 @@ import Landing from "./Landing";
 import Contents from "./Contents";
 
 class App extends Component {
-  // componentDidMount() {
-  //   this.props.loginUser();
-  // }
-  // store = createStore(reducers, {}, applyMiddleware(reduxThunk));
-
   render() {
     return (
       <div className="ui container">

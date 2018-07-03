@@ -1,13 +1,8 @@
 import axios from "axios";
+const mongoose = require("mongoose");
 
 export const fetchUser = () => async dispatch => {
-  const res = await axios.get("/api/login");
+  const res = await axios.get("/api/signin");
 
-  dispatch({ type: "fetch_user", payload: res.data });
-};
-
-export const loginUser = () => async dispatch => {
-  const res = await axios.post("/api/login");
-
-  dispatch({ type: "login_user", payload: res.data });
+  dispatch({ type: "fetch_user", payload: res.data.session });
 };
