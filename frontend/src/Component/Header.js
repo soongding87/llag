@@ -5,10 +5,39 @@ import { connect } from 'react-redux';
 
 class Header extends Component {
 
+  renderContent() {
+    switch (this.props.auth) {
+      case null:
+        return;
+      case false:
+        return [
+          <Menu.Item
+            name="SignUp"
+            href="/signup"
+            key='1'
+          />,
+          <Menu.Item
+            name="SignIn"
+            href="/signin"
+            key='2'
+          />
+        ];
+      default:
+        return [
+          <Menu.Item
+            key="1"
+            name="contents"
+            href="/contents"
+          />,
+          <a href="/api/logout">logout</a>
+        ]
+    }
+  }
 
   render() {
     console.log(this.props.auth)
     return (
+
       <div>
         <Menu secondary size="massive">
           <Menu.Item header>LLAG </Menu.Item>
@@ -16,18 +45,7 @@ class Header extends Component {
             name="home"
             href="/"
           />
-          <Menu.Item
-            name="SignUp"
-            href="/signup"
-          />
-          <Menu.Item
-            name="SignIn"
-            href="/signin"
-          />
-          <Menu.Item
-            name="contents"
-            href="/contents"
-          />
+{this.renderContent()}
           <Menu.Menu position="right">
             <Menu.Item>
               <Input icon="search" placeholder="Search..." />
