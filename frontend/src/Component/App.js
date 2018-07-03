@@ -6,10 +6,7 @@ import SignIn from "./SignIn";
 import { BrowserRouter, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import Landing from "./Landing";
-import { createStore, applyMiddleware } from "redux";
-import reduxThunk from "redux-thunk";
 import Contents from "./Contents";
-import reducers from "../reducers";
 
 class App extends Component {
   render() {
