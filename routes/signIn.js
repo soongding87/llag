@@ -20,6 +20,7 @@ module.exports = app => {
     }
   });
 
+
   app.post(
     "/api/signin",
     passport.authenticate("local", {
