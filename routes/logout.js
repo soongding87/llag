@@ -5,12 +5,11 @@ const passport = require("passport");
 
 module.exports = app => {
   app.get("/api/logout", function(req, res, next) {
-    console.log("try logout", req.session)
+    console.log("try logout", req.slession)
     req.logout();
     req.session.destroy();
     res.json({
       message: "Logged out"
     });
   });
-
 };

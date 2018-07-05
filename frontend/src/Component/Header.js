@@ -23,11 +23,15 @@ class Header extends Component {
       default:
         return [
           <Menu.Item
+            key="3">
+            name: {this.props.auth.username}
+          </Menu.Item>,
+          <Menu.Item
             key="1"
             name="contents"
             href="/contents"
           />,
-          <a href="/api/logout">logout</a>
+          <a key="2" href="/api/logout">logout</a>
         ]
     }
   }
