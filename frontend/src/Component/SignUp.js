@@ -21,7 +21,7 @@ class SignUp extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    axios.post("/api/users", this.state).then(res => {
+    axios.post("/api/signup", this.state).then(res => {
       if (res.status === 200) {
         this.setState({
           redirectTo: "/"
