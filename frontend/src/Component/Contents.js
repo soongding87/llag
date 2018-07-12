@@ -15,12 +15,16 @@ export default class Contents extends Component {
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      margin: "5vh"
+      margin: "2vh",
+      padding: "1vh",
+      borderStyle: "none",
+      borderRadius: "20px",
+      boxShadow: '10px 10px 14px -7px rgba(0,0,0,0.61)'
     };
 
     return (
       <div style={contentsStyle}>
-        <Item.Group items={this.state.data} />
+        <Item.Group divided items={this.state.data} />
       </div>
     );
   }
