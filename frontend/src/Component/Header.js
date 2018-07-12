@@ -4,29 +4,21 @@ import { connect } from "react-redux";
 
 class Header extends Component {
   renderContent() {
-    if (!localStorage.session) {
+    if (this.props.authenticated) {
       return [
-        <Menu.Item name="SignUp" href="/signup" key="1" />,
-        <Menu.Item name="SignIn" href="/signin" key="2" />
+        <Menu.Item key="3">Welcome </Menu.Item>,
+        <Menu.Item key="4" name="Contents" href="/contents" />,
+        <Menu.Item key="5" name="SignOut" href="/signout" />
       ];
     } else {
       return [
-        <Menu.Item key="3">Welcome {localStorage.session}</Menu.Item>,
-        <Menu.Item key="4" name="Contents" href="/contents" />,
-        <Menu.Item
-          key="5"
-          name="SignOut"
-          href="/api/logout"
-          onClick={this.props.onSignOut}
-        />
+        <Menu.Item name="SignUp" href="/signup" key="1" />,
+        <Menu.Item name="SignIn" href="/signin" key="2" />
       ];
     }
   }
 
   render() {
-    if (this.props.auth) {
-      localStorage.setItem("session", this.props.auth.username);
-    }
     return (
       <div>
         <Menu secondary size="massive">
@@ -44,8 +36,11 @@ class Header extends Component {
   }
 }
 
-function mapStateToProps({ auth }) {
-  return { auth };
+function mapStateToProps(state) {
+  return {
+    authenticated: state.auth.authenticated,
+    auth: state.auth
+  };
 }
 
 export default connect(mapStateToProps)(Header);
