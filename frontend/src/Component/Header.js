@@ -4,20 +4,18 @@ import { connect } from "react-redux";
 
 class Header extends Component {
   renderContent() {
-    if(this.props.authenticated) {
+    if (this.props.authenticated) {
       return [
         <Menu.Item key="3">Welcome </Menu.Item>,
         <Menu.Item key="4" name="Contents" href="/contents" />,
         <Menu.Item key="5" name="SignOut" href="/signout" />
       ];
-
-      } else {
-        return [
-          <Menu.Item name="SignUp" href="/signup" key="1" />,
-          <Menu.Item name="SignIn" href="/signin" key="2" />
-        ];
-            }
-
+    } else {
+      return [
+        <Menu.Item name="SignUp" href="/signup" key="1" />,
+        <Menu.Item name="SignIn" href="/signin" key="2" />
+      ];
+    }
   }
 
   render() {
@@ -38,12 +36,11 @@ class Header extends Component {
   }
 }
 
-
 function mapStateToProps(state) {
   return {
     authenticated: state.auth.authenticated,
     auth: state.auth
-   };
+  };
 }
 
 export default connect(mapStateToProps)(Header);
