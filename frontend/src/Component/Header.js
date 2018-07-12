@@ -1,53 +1,31 @@
-import React, { Component } from 'react';
-import { Input, Menu } from 'semantic-ui-react';
-import { connect } from 'react-redux';
-
+import React, { Component } from "react";
+import { Input, Menu } from "semantic-ui-react";
+import { connect } from "react-redux";
 
 class Header extends Component {
-
   renderContent() {
     switch (this.props.auth) {
       case null:
         return [
-          <Menu.Item
-            name="SignUp"
-            href="/signup"
-            key='1'
-          />,
-          <Menu.Item
-            name="SignIn"
-            href="/signin"
-            key='2'
-          />
+          <Menu.Item name="SignUp" href="/signup" key="1" />,
+          <Menu.Item name="SignIn" href="/signin" key="2" />
         ];
       default:
         return [
-          <Menu.Item
-            key="3">
-            name: {this.props.auth.username}
-          </Menu.Item>,
-          <Menu.Item
-            key="1"
-            name="contents"
-            href="/contents"
-          />,
-          <a key="2" href="/api/logout">logout</a>
-        ]
+          <Menu.Item key="3">Welcome {this.props.auth.username}</Menu.Item>,
+          <Menu.Item key="4" name="Contents" href="/contents" />,
+          <Menu.Item key="5" name="SignOut" href="/api/logout" />
+        ];
     }
   }
 
   render() {
-    console.log(this.props.auth)
     return (
-
       <div>
         <Menu secondary size="massive">
           <Menu.Item header>LLAG </Menu.Item>
-          <Menu.Item
-            name="home"
-            href="/"
-          />
-{this.renderContent()}
+          <Menu.Item name="home" href="/" />
+          {this.renderContent()}
           <Menu.Menu position="right">
             <Menu.Item>
               <Input icon="search" placeholder="Search..." />

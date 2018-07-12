@@ -10,8 +10,8 @@ import Contents from "./Contents";
 
 class App extends Component {
   componentDidMount() {
-  this.props.fetchUser();
-}
+    this.props.fetchUser();
+  }
   render() {
     return (
       <div className="ui container">

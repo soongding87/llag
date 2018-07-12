@@ -10,18 +10,17 @@ mongoose.Promise = global.Promise;
 // login page
 module.exports = app => {
   app.get("/api/signin", function(req, res, next) {
-    console.log('req is ',req.session.passport)
-    if (req.session.passport!==undefined) {
+    console.log("req is ", req.session.passport);
+    if (req.session.passport !== undefined) {
       const current_user = req.session.passport.user;
       User.findById(current_user).then(user => {
+        console.log(user);
         res.json({
           session: user
-        })
-        res.redirect('/')
+        });
       });
     }
   });
-
 
   app.post(
     "/api/signin",
@@ -30,5 +29,5 @@ module.exports = app => {
       failureRedirect: "/signin",
       failureFlash: true
     })
-  )
+  );
 };
