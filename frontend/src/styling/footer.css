@@ -1,4 +1,9 @@
 .Footer {
   background-color: #1b1c1d;
-  display: block;
+  display: flex;
+  height: 100px;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  position: absolute;
 }
