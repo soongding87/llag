@@ -11,7 +11,13 @@ import 'semantic-ui-css/semantic.min.css';
 import 'animate.css/animate.min.css';
 import 'typeface-roboto';
 
-const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
+const store = createStore(
+  reducers,
+  {
+    auth: { authenticated: localStorage.getItem('token') }
+  },
+  applyMiddleware(reduxThunk)
+);
 
 
 ReactDOM.render(
